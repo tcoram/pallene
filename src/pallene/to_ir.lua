@@ -1078,6 +1078,10 @@ function ToIR:exp_to_assignment(cmds, dst, exp)
                 assert(#xs == 1)
                 table.insert(cmds, ir.Cmd.BuiltinStringChar(loc, dsts, xs))
                 table.insert(cmds, ir.Cmd.CheckGC())
+            elseif bname == "string.byte" then
+                assert(#xs == 2)
+                table.insert(cmds, ir.Cmd.BuiltinStringByte(loc, dsts, xs))
+                table.insert(cmds, ir.Cmd.CheckGC())
             elseif bname == "string.sub" then
                 assert(#xs == 3)
                 table.insert(cmds, ir.Cmd.BuiltinStringSub(loc, dsts, xs))

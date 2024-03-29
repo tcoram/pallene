@@ -179,6 +179,7 @@ local ir_cmd_constructors = {
     BuiltinMathPow    = {"loc", "dsts", "srcs"},
     BuiltinMathSqrt   = {"loc", "dsts", "srcs"},
     BuiltinStringChar = {"loc", "dsts", "srcs"},
+    BuiltinStringByte = {"loc", "dsts", "srcs"},
     BuiltinStringSub  = {"loc", "dsts", "srcs"},
     BuiltinType       = {"loc", "dsts", "srcs"},
     BuiltinTostring   = {"loc", "dsts", "srcs"},

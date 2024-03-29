@@ -1532,6 +1532,14 @@ gen_cmd["BuiltinStringChar"] = function(self, cmd, _func)
         dst = dst, v = v, line = C.integer(line) })
 end
 
+gen_cmd["BuiltinStringByte"] = function(self, cmd, _func)
+    local dst = self:c_var(cmd.dsts[1])
+    local str = self:c_value(cmd.srcs[1])
+    local i   = self:c_value(cmd.srcs[2])
+    return util.render([[ $dst = pallene_string_byte(L, $str, $i); ]], {
+        dst = dst, str = str, i = i})
+end
+
 gen_cmd["BuiltinStringSub"] = function(self, cmd, _func)
     local dst = self:c_var(cmd.dsts[1])
     local str = self:c_value(cmd.srcs[1])

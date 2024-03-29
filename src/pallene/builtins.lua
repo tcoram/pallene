@@ -42,6 +42,7 @@ builtins.modules = {
     string = {
         char = T.Function({ T.Integer() }, { T.String() }),
         sub  = T.Function({ T.String(), T.Integer(), T.Integer() }, { T.String() }),
+        byte  = T.Function({ T.String(), T.Integer() }, { T.Integer() }),
     },
 }
 

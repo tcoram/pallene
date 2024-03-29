@@ -91,6 +91,7 @@ static lua_Integer pallene_math_modf(lua_State *L, const char* file, int line, l
 /* Other builtins */
 static TString* pallene_string_char(lua_State *L, const char* file, int line, lua_Integer c);
 static TString* pallene_string_sub(lua_State *L, TString *str, lua_Integer start, lua_Integer end);
+static lua_Integer pallene_string_byte(lua_State *L, TString *str, lua_Integer ipos);
 static TString *pallene_type_builtin(lua_State *L, TValue v);
 static TString *pallene_tostring(lua_State *L, const char* file, int line, TValue v);
 static void pallene_io_write(lua_State *L, TString *str);
@@ -524,6 +525,18 @@ static TString* pallene_string_sub(
     } else {
         return luaS_new(L, "");
     }
+}
+static lua_Integer pallene_string_byte(
+        lua_State *L, TString *str, lua_Integer ipos)
+{
+    const char *s = getstr(str);
+    size_t len = tsslen(str);
+    size_t pos = get_start_pos(ipos, len);
+    if (pos <= len) {
+      return cast_uint(s[pos-1]&255);
+    }
+   luaL_error(L, "bad index for string.byte");
+   PALLENE_UNREACHABLE;
 }
 
 static TString *pallene_type_builtin(lua_State *L, TValue v) {
