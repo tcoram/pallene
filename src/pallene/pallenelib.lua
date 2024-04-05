@@ -532,10 +532,10 @@ static lua_Integer pallene_string_byte(
     const char *s = getstr(str);
     size_t len = tsslen(str);
     size_t pos = get_start_pos(ipos, len);
-    if (pos <= len) {
+    if (len > 0 && pos <= len) {
       return cast_uint(s[pos-1]&255);
     }
-   luaL_error(L, "bad index for string.byte");
+   luaL_error(L, "invalid index for string.byte");
    PALLENE_UNREACHABLE;
 }
 

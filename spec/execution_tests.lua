@@ -1811,6 +1811,22 @@ function execution_tests.run(compile_file, backend, _ENV, only_compile)
         end)
     end)
 
+    describe("string.byte builtin", function()
+        compile([[
+            function m.byt(x: string, i: integer): integer
+                return string.byte(x,i)
+            end
+        ]])
+
+        it("works on normal characters", function()
+            run_test([[
+                for i = 1, 255 do
+                    assert(string.byte(string.char(i), 1) == test.byt(string.char(i), 1))
+                end
+            ]])
+        end)
+    end)
+
     describe("string.sub builtin", function()
         compile([[
             function m.sub(s: string, i: integer, j: integer): string
